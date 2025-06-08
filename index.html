@@ -3,93 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Hub</title>
+    <title>ScottWeb</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
+        /* Favicon circle style */
+        link[rel="icon"] {
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
         :root {
-            --primary-color: #007AFF;
-            --background-color: #F5F5F7;
-            --card-background: #FFFFFF;
-            --text-color: #1D1D1F;
-            --transition-speed: 0.3s;
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --primary: #3b82f6;
+            --accent: #60a5fa;
+            --text: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: #334155;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.5;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
         }
 
         .hero {
-            background: linear-gradient(to bottom, #000000, #1D1D1F);
-            color: white;
-            padding: 8rem 2rem;
+            min-height: auto;
+            padding: 6rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at top right, var(--primary), transparent 50%),
+                        radial-gradient(circle at bottom left, var(--accent), transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
             text-align: center;
-            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 0;
         }
 
         .hero h1 {
-            font-size: 4rem;
-            font-weight: 700;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            color: var(--text);
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, #86868B);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            display: block;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            color: #86868B;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-secondary);
             max-width: 600px;
+            font-weight: 500;
+            display: block;
             margin: 0 auto;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 4rem 2rem;
         }
 
         .apps-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .app-card {
-            background: var(--card-background);
-            border-radius: 18px;
+            background: var(--surface);
+            border-radius: 16px;
             overflow: hidden;
-            transition: transform var(--transition-speed);
+            transition: all 0.3s ease;
             cursor: pointer;
             text-decoration: none;
-            color: var(--text-color);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            color: var(--text);
+            border: 1px solid var(--border);
+            position: relative;
         }
 
         .app-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
         .app-image {
             width: 100%;
             height: 200px;
-            background: var(--primary-color);
+            background: linear-gradient(45deg, var(--primary), var(--accent));
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.2));
         }
 
         .app-image i {
             font-size: 4rem;
-            color: white;
+            color: var(--text);
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover .app-image i {
+            transform: scale(1.1);
         }
 
         .app-content {
@@ -98,27 +149,39 @@
 
         .app-title {
             font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text);
         }
 
         .app-description {
-            color: #86868B;
+            color: var(--text-secondary);
             font-size: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .app-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 500;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: gap 0.3s ease;
         }
 
         .app-link:hover {
-            text-decoration: underline;
+            gap: 0.75rem;
+        }
+
+        .app-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .app-link:hover i {
+            transform: translateX(4px);
         }
 
         @media (max-width: 768px) {
@@ -126,29 +189,28 @@
                 padding: 4rem 1rem;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
             .container {
-                padding: 1rem;
+                padding: 2rem 1rem;
             }
 
             .apps-grid {
                 grid-template-columns: 1fr;
             }
+
+            .app-content {
+                padding: 1.5rem;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="hero">
-        <h1>Digital Hub</h1>
-        <p>Your gateway to innovative digital experiences</p>
+        <div class="hero-content">
+            <h1>ScottWeb</h1>
+            <p>En hjemmeside lavet af Scott👍</p>
+        </div>
     </div>
 
     <div class="container">
@@ -159,8 +221,8 @@
                 </div>
                 <div class="app-content">
                     <h2 class="app-title">TSCompany</h2>
-                    <p class="app-description">Professional business solutions and services</p>
-                    <span class="app-link">Learn more <i class="fas fa-chevron-right"></i></span>
+                    <p class="app-description">TScompany er en et tøjfirma, skabt af Scott og Theodor, vi sælger tøj.</p>
+                    <span class="app-link">Gå til TScompany<i class="fas fa-chevron-right"></i></span>
                 </div>
             </a>
 
@@ -170,8 +232,8 @@
                 </div>
                 <div class="app-content">
                     <h2 class="app-title">Scott's Ping Pong Game</h2>
-                    <p class="app-description">Challenge yourself in this exciting ping pong simulation</p>
-                    <span class="app-link">Learn more <i class="fas fa-chevron-right"></i></span>
+                    <p class="app-description">Udfordr dig selv i dette spændende bordtennis-simulationsspil</p>
+                    <span class="app-link">Gå til Scott's Ping Pong Game<i class="fas fa-chevron-right"></i></span>
                 </div>
             </a>
 
@@ -181,8 +243,8 @@
                 </div>
                 <div class="app-content">
                     <h2 class="app-title">Crypto Trading Simulator</h2>
-                    <p class="app-description">Practice trading cryptocurrencies in a risk-free environment</p>
-                    <span class="app-link">Learn more <i class="fas fa-chevron-right"></i></span>
+                    <p class="app-description">Øv dig i at handle med kryptovalutaer i en risikofri miljø</p>
+                    <span class="app-link">Gå til Crypto Trading Simulator<i class="fas fa-chevron-right"></i></span>
                 </div>
             </a>
         </div>
@@ -203,8 +265,16 @@
                         card.style.transform = 'scale(1.02)';
                     }, 150);
 
-                    // Here you would typically redirect to the actual application
-                    console.log(`Navigating to ${app}`);
+                    // Redirect to the appropriate page
+                    if (app === 'crypto') {
+                        window.location.href = 'crypto trading simulator.html';
+                    } else if (app === 'pingpong') {
+                        window.location.href = 'pingpong.html';
+                    } else if (app === 'tscompany') {
+                        window.location.href = 'tscompany.html';
+                    } else {
+                        console.log(`Navigating to ${app}`);
+                    }
                 });
             });
         });
