@@ -451,7 +451,7 @@
             const elapsedSeconds = (currentTime - gameStartTime) / 1000;
             
             // Increase speed every 5 seconds
-            const newSpeedMultiplier = 1 + Math.floor(elapsedSeconds / 5) * 0.1;
+            const newSpeedMultiplier = 2 + Math.floor(elapsedSeconds / 5) * 0.1;
             
             if (newSpeedMultiplier !== speedMultiplier) {
                 speedMultiplier = newSpeedMultiplier;
