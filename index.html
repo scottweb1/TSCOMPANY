@@ -257,6 +257,16 @@
                     <p class="app-description">Prøv lykken, husk at huset vinder altid så det er aldrig værd at gable</p>
                     <span class="app-link">Gå til Gamble Simulator<i class="fas fa-chevron-right"></i></span>
                 </div>
+
+                <a href="#" class="app-card" data-app="popup">
+                <div class="app-image">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="app-content">
+                    <h2 class="app-title">Pop Up Game</h2>
+                    <p class="app-description">Sæt en rækord i at lukke pop ups</p>
+                    <span class="app-link">Gå til Pop Up Game<i class="fas fa-chevron-right"></i></span>
+                </div>
             </a>
             
         </div>
@@ -286,6 +296,8 @@
                         window.location.href = 'tscompany.html';
                         } else if (app === 'gamble') {
                         window.location.href = 'gamble.html';
+                    } else if (app === 'popup') {
+                        window.location.href = 'popup.html';
                     } else {
                         console.log(`Navigating to ${app}`);
                     }
@@ -295,6 +307,7 @@
     </script>
 </body>
 </html>
+
 
 
 
