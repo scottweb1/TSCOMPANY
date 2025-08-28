@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinite Counter</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      color: #0f0;
+      font-family: monospace;
+      font-size: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="timer">0</div>
+
+  <script>
+    // Load saved time or start at 0
+    let elapsed = parseInt(localStorage.getItem("timerValue")) || 0;
+    const timerDisplay = document.getElementById("timer");
+
+    function updateTimer() {
+      elapsed++;
+      timerDisplay.textContent = elapsed;
+      localStorage.setItem("timerValue", elapsed);
+    }
+
+    // Display initial value
+    timerDisplay.textContent = elapsed;
+
+    // Count up every second
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
